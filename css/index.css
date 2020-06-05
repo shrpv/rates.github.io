@@ -38,10 +38,14 @@ a[href*="000webhost"] {
 }
 
 .rate {
-    margin-bottom: 20px;
-    padding-top: 10px;
-
     font-size: 20px;
+}
+.rate-buy {
+    padding-top: 10px;
+    margin-bottom: 20px;
+}
+.rate-sell {
+    padding-bottom: 10px;
 }
 .rate__value {
     margin-right: 10px;
@@ -86,7 +90,7 @@ a[href*="000webhost"] {
 }
 
 .platforms {
-    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 .platforms__heading {
     margin-bottom: 10px;

@@ -16,11 +16,13 @@
     <title>Rates</title>
 
     <link rel="stylesheet" href="css/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 <body>
     <div class="container">
-        <div class="rate">
-            <span class="rate__value" id="rate-value">...</span>
+      <div id="app">
+        <div class="rate rate-buy">
+            <span class="rate__value">{{ buyPrice | split }}</span>
 
             <a class="rate__link" href="https://ennlo.com/offers/direct/92" target="_blank">Buy</a>
         </div>
@@ -29,7 +31,7 @@
             <h1 class="price__heading heading">Prices</h1>
 
             <div class="price__item">
-                <span class="price__value" id="price-value-0">...</span>
+                <span class="price__value">{{ buyPrice | markup(1) | split }}</span>
 
                 <span class="price__markup">+0%</span>
 
@@ -37,49 +39,49 @@
             </div>
 
             <div class="price__item">
-                <span class="price__value" id="price-value-03">...</span>
+                <span class="price__value">{{ buyPrice | markup(1.3) | split }}</span>
 
                 <span class="price__markup">+0.3%</span>
             </div>
 
             <div class="price__item">
-                <span class="price__value" id="price-value-05">...</span>
+                <span class="price__value">{{ buyPrice | markup(1.5) | split }}</span>
 
                 <span class="price__markup">+0.5%</span>
             </div>
 
             <div class="price__item">
-                <span class="price__value" id="price-value-07">...</span>
+                <span class="price__value">{{ buyPrice | markup(1.7) | split }}</span>
 
                 <span class="price__markup">+0.7%</span>
             </div>
 
             <div class="price__item">
-                <span class="price__value" id="price-value-1">...</span>
+                <span class="price__value">{{ buyPrice | markup(2) | split }}</span>
 
                 <span class="price__markup">+1%</span>
             </div>
 
             <div class="price__item">
-                <span class="price__value" id="price-value-12">...</span>
+                <span class="price__value">{{ buyPrice | markup(2.2) | split }}</span>
 
                 <span class="price__markup">+1.2%</span>
             </div>
 
             <div class="price__item">
-                <span class="price__value" id="price-value-15">...</span>
+                <span class="price__value">{{ buyPrice | markup(2.5) | split }}</span>
 
                 <span class="price__markup">+1.5%</span>
             </div>
 
             <div class="price__item">
-                <span class="price__value" id="price-value-17">...</span>
+                <span class="price__value">{{ buyPrice | markup(2.7) | split }}</span>
 
                 <span class="price__markup">+1.7%</span>
             </div>
 
             <div class="price__item">
-                <span class="price__value" id="price-value-2">...</span>
+                <span class="price__value">{{ buyPrice | markup(3) | split }}</span>
 
                 <span class="price__markup">+2%</span>
             </div>
@@ -144,8 +146,57 @@
                 <a class="platforms__link" href="https://bgex.org/list" target="_blank">Requests</a>
             </div>
         </div>
+
+        <div class="rate rate-sell">
+            <span class="rate__value">{{ sellPrice | split }}</span>
+
+            <a class="rate__link" href="https://ennlo.com/offers/direct/96" target="_blank">Sell</a>
+        </div>
+      </div>
     </div>
 
-    <script src="js/index.js"></script>
+    <script>
+      var app = new Vue({
+        el: '#app',
+
+        filters: {
+          split(value) {
+            return value.toString().replace(/\B(?=(?:\d{3})+$)/g, ' ')
+          },
+
+          markup(value, delta) {
+            return Math.round(value +  (value * delta / 100));
+          }
+        },
+
+        data: {
+          buyPrice: '...',
+          sellPrice: '...'
+        },
+
+        mounted() {
+          this.getPrices();
+          
+          setInterval(() => {
+            this.getPrices();   
+          }, 10000);
+        },
+
+        methods: {
+          getPrices() {
+            this.fetchPrice(92).then(price => this.buyPrice = price);
+            this.fetchPrice(96).then(price => this.sellPrice = price);
+          },
+          
+          fetchPrice(id) {
+            return fetch('https://ennlo.com/api/v1/offers/direct/' + id)
+              .then(response => response.json())
+              .then(result => {
+                return Math.round(result['offer']['current_rate']['value']);
+              });
+          }
+        }
+      })
+    </script>
 </body>
 </html>
