@@ -175,13 +175,13 @@
           },
 
           markup(value, delta) {
-            return Math.round(value +  (value * delta / 100));
+            return typeof value === 'number' ? Math.round(value +  (value * delta / 100)) : value;
           }
         },
 
         data: {
-          buyPrice: '...',
-          sellPrice: '...'
+          buyPrice: '',
+          sellPrice: ''
         },
 
         mounted() {
