@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700&display=swap&subset=latin-ext");
+
+body {
+    min-width: 320px;
+    margin: 0;
+
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.23;
+    font-family: "Rajdhani", sans-serif;
+    color: #383838;
+    text-transform: uppercase;
+
+    background-color: #f6f6f6;
+}
+a {
+    color: #386ce5;
+    text-decoration: none;
+}
+a[href*="000webhost"] {
+    display: none;
+}
+.container {
+    max-width: 930px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.heading {
+    margin: 0;
+
+    font-size: 32px;
+    /* opacity: 0.5; */
+    color: #fe467c;
+    letter-spacing: -0.5px;
+}
+
+.rate {
+    font-size: 20px;
+}
+.rate-buy {
+    padding-top: 10px;
+    margin-bottom: 20px;
+}
+.rate-sell {
+    padding-bottom: 10px;
+}
+.rate__value {
+    margin-right: 10px;
+}
+.rate__value::before {
+    content: "BTC ";
+}
+.rate__value::after {
+    content: " ERUB";
+}
+
+.price {
+    margin-bottom: 20px;
+}
+.price__heading {
+    margin-bottom: 10px;
+}
+.price__item {
+    margin-bottom: 5px;
+}
+.price__value::after {
+    content: " RUB";
+}
+.price__markup {
+    color: #4ca061;
+}
+.price__link {
+    margin-left: 10px;
+}
+
+.lists {
+    margin-bottom: 20px;
+}
+.lists__heading {
+    margin-bottom: 10px;
+}
+.lists__item {
+    margin-bottom: 5px;
+}
+.lists__value {
+    margin-right: 10px;
+}
+
+.platforms {
+    margin-bottom: 20px;
+}
+.platforms__heading {
+    margin-bottom: 10px;
+}
+.platforms__item {
+    margin-bottom: 5px;
+}
+.platforms__value {
+    margin-right: 10px;
+}
+.platforms__link {
+    margin-right: 5px;
+}
+.platforms__link:last-child {
+    margin-right: 0;
+}
